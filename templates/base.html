@@ -63,6 +63,10 @@
         .cities-dropdown-wrapper {
             margin-bottom: 1em;
         }
+
+	    .container-logo {
+		    margin: 15px 0;
+	    }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@vizuaalog/bulmajs@0.10.3/dist/file.js" integrity="sha256-9BDCQ1iKLp8eEXxQD6U8StZ4V2On9KFEHDeHeXLZ/aE=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@vizuaalog/bulmajs@0.10.3/dist/modal.js" integrity="sha256-HDcVnTQ5+DdyigrR4Xge4rxqguBi19XI7vNDhTDr+hs=" crossorigin="anonymous"></script>
@@ -73,9 +77,13 @@
 <body class="Site">
     <section class="hero is-primary">
         <div class="container">
-          <a href="/">
-            <h1 class="title center">AyudaPy<span class="icon is-large has-text-grey-dark"><i class="fas fa-hand-holding-heart"></i></span></h1>
-          </a>
+
+			<nav class="container-logo">
+			  <a class="level-item has-text-centered" href="#">
+			    <img src="{% static "img/logo_bg_colour.svg" %}" alt="AyudaPy.org">
+			  </a>
+			</nav>
+
             <p class="subtitle center is-6">
                 Experimento para unir a gente que necesita con gente que quiere ayudar
             </p>
