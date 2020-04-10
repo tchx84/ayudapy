@@ -1,7 +1,7 @@
 from django import forms
 from leaflet.forms.widgets import LeafletWidget
 
-from .models import HelpRequest
+from .models import HelpRequest, Tag
 
 
 class HelpRequestForm(forms.ModelForm):
@@ -15,6 +15,7 @@ class HelpRequestForm(forms.ModelForm):
             "location",
             "address",
             "picture",
+            "tag_code",
         )
         widgets = {
             "location": LeafletWidget(),
@@ -35,4 +36,6 @@ class HelpRequestForm(forms.ModelForm):
             "name": forms.TextInput(attrs={"class": "input"}),
             "phone": forms.TextInput(attrs={"class": "input", "type": "tel"}),
             "address": forms.TextInput(attrs={"class": "input"}),
+            "tag_code": forms.RadioSelect()
         }
+

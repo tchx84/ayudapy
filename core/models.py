@@ -13,6 +13,33 @@ from core.utils import create_thumbnail, rename_img
 logger = logging.getLogger(__name__)
 THUMBNAIL_BASEWIDTH = 500
 
+class Tag(models.Model):
+    name = models.CharField(
+        "Nombre del tag",
+        max_length=40,
+        help_text="Nombre del tag"
+    )
+    code = models.CharField(
+        "Código del tag",
+        max_length=20,
+        help_text="Código del tag",
+        primary_key=True,
+        db_index=True
+    )
+    active = models.BooleanField(default=True, db_index=True, null=True)
+    icon = models.CharField(
+        "Ícono del tag",
+        max_length=30,
+        help_text="Ícono Font Awesome, ejemplo: fa fa-star",
+        null=True
+    )
+    color = models.CharField(
+        "Color del tag",
+        max_length=7,
+        help_text="Color hexadecimal, ejemplo: #70798C",
+        null=True
+    )
+    private = models.BooleanField(default=False)
 
 class HelpRequest(models.Model):
     title = models.CharField(
@@ -56,6 +83,8 @@ class HelpRequest(models.Model):
     downvotes = models.IntegerField(default=0, blank=True)
     city = models.CharField(max_length=30, blank=True, default="", editable=False)
     city_code = models.CharField(max_length=30, blank=True, default="", editable=False)
+    tag_code = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True)
+
 
     @property
     def thumb(self):

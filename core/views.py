@@ -12,7 +12,7 @@ from rest_framework_gis.filters import InBBoxFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .forms import HelpRequestForm
-from .models import HelpRequest
+from .models import HelpRequest, Tag
 from .serializers import HelpRequestSerializer, HelpRequestGeoJSONSerializer
 
 
@@ -55,6 +55,7 @@ def view_request(request, id):
     help_request = get_object_or_404(HelpRequest, pk=id)
     context = {
         "help_request": help_request,
+        "tags": Tag.objects.all(),
         "thumbnail": help_request.thumb if help_request.picture else "/static/favicon.ico",
     }
     if request.POST:
