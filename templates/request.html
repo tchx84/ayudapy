@@ -130,9 +130,19 @@
                 <div class="is-fullwidth">
                 {% include 'includes/buttons.html'%}
                 </div>
-          
-
-        
+    
+                {% if user.is_authenticated %}
+                    <div class ="select" >
+                        <select name="{{ help_request.status_id }}" id = "id_status_id">
+                            { % if estados %}
+                                { %
+                                for estado in estados %}
+                                <option value = {{estado.code}} > {{estado.name}} </option>
+                                { % endfor %}
+                            { % endif %}
+                        </select>
+                    </div>
+                {% endif %}
 
         <script type="text/javascript">
             function main_map_init(map, options) {

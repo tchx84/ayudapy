@@ -1,7 +1,7 @@
 from django import forms
 from leaflet.forms.widgets import LeafletWidget
 
-from .models import HelpRequest
+from .models import HelpRequest, Status
 
 
 class HelpRequestForm(forms.ModelForm):
@@ -15,6 +15,7 @@ class HelpRequestForm(forms.ModelForm):
             "location",
             "address",
             "picture",
+            "status_id",
         )
         widgets = {
             "location": LeafletWidget(),

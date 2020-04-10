@@ -9,7 +9,7 @@ from django.shortcuts import (
 from rest_framework import viewsets
 
 from .forms import HelpRequestForm
-from .models import HelpRequest
+from .models import HelpRequest, Status
 from .serializers import HelpRequestSerializer
 
 
@@ -38,6 +38,7 @@ def view_request(request, id):
     help_request = get_object_or_404(HelpRequest, pk=id)
     context = {
         "help_request": help_request,
+        "estados": Status.objects.all(),
         "thumbnail": help_request.thumb if help_request.picture else "/static/favicon.ico",
     }
     if request.POST:

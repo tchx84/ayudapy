@@ -14,6 +14,22 @@ logger = logging.getLogger(__name__)
 THUMBNAIL_BASEWIDTH = 500
 
 
+class Status(models.Model):
+    name = models.CharField(
+        "Nombre del estado",
+        max_length=40,
+        help_text="Nombre del estado"
+    )
+    code = models.CharField(
+        "Código del estado",
+        max_length=10,
+        help_text="Código del estado",
+        primary_key=True,
+        db_index=True
+    )
+    active = models.BooleanField(default=True, db_index=True)
+
+
 class HelpRequest(models.Model):
     title = models.CharField(
         "Título del pedido",
@@ -56,6 +72,7 @@ class HelpRequest(models.Model):
     downvotes = models.IntegerField(default=0, blank=True)
     city = models.CharField(max_length=30, blank=True, default="", editable=False)
     city_code = models.CharField(max_length=30, blank=True, default="", editable=False)
+    status_id = models.ForeignKey(Status, on_delete=models.CASCADE, default='pendiente')
 
     @property
     def thumb(self):
@@ -97,18 +114,3 @@ def thumbnail(sender, instance, created, **kwargs):
         except Exception as e:
             logger.error(f"Error creating thumbnail: {repr(e)}")
 
-
-class Status(models.Model):
-    name = models.CharField(
-        "Nombre del estado",
-        max_length=40,
-        help_text="Nombre del estado"
-    )
-    code = models.CharField(
-        "Código del estado",
-        max_length=10,
-        help_text="Código del estado",
-        primary_key=True,
-        db_index=True
-    )
-    active = models.BooleanField(default=True, db_index=True)
